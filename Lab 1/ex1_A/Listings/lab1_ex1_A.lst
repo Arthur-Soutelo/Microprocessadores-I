@@ -1,0 +1,63 @@
+A51 MACRO ASSEMBLER  LAB1_EX1_A                                                           08/08/2021 16:51:31 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\lab1_ex1_A.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE lab1_ex1_A.a51 SET(SMALL) DEBUG PRINT(.\Listings\lab1_ex1_A.lst) OBJECT
+                      (.\Objects\lab1_ex1_A.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;Nome: Arthur Antonio Soutelo Araujo
+                       2     ;Cartão UFRGS: 00304292
+                       3     
+                       4     ;Exercício 1:Desenvolva um código em Assembly que implemente a subtração de dois números de
+                       5     ;                        16 bits, salvando o resultado da subtração nos registradores R7 e 
+                             R6, respectivamente.
+                       6     ;Laboratório 1 - Exercício 1 - Letra A
+                       7     ;-------------------------------------------------------------------------------------
+                       8     ;Programa que subtrai dois numeros de 16 bits
+                       9             ;O primeiro número vai ser armazenado em R1 e R0
+                      10             ;O segundo número vai ser armazenado em R3 e R2
+                      11             ;O resultado deve ser armazenado em R7 e R6
+                      12     
+                      13     ;               R1      R0
+                      14     ;       -       R3      R2
+                      15     ;       ------------
+                      16     ;               R7      R6
+                      17     
+                      18     ;Testar com 1349 - 873 = 476
+                      19             ;Primeiro devemos passar os valores para hexadecimal:
+                      20             ;545 - 369 = 1DC        <--------- VALORES EM HEXA
+                      21     
+                      22     ;Inicializando os registradores com os valores de teste
+                      23     ;Primeiro número:
+0000 7845             24     MOV R0, #45h
+0002 7905             25     MOV R1, #05h
+                      26     ;Segundo número:
+0004 7A69             27     MOV R2, #69h
+0006 7B03             28     MOV R3, #03h
+                      29     
+                      30     ;Realização da subtração
+0008 E8               31     MOV A, R0
+0009 9A               32     SUBB A, R2
+000A FE               33     MOV R6, A
+000B E9               34     MOV A, R1
+000C 9B               35     SUBB A, R3
+000D FF               36     MOV R7, A
+                      37     
+                      38     END
+A51 MACRO ASSEMBLER  LAB1_EX1_A                                                           08/08/2021 16:51:31 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

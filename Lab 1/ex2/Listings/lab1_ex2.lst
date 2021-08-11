@@ -1,0 +1,99 @@
+A51 MACRO ASSEMBLER  LAB1_EX2                                                             08/08/2021 16:49:09 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.7.0
+OBJECT MODULE PLACED IN .\Objects\lab1_ex2.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE lab1_ex2.a51 SET(SMALL) DEBUG PRINT(.\Listings\lab1_ex2.lst) OBJECT(.\O
+                      bjects\lab1_ex2.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;Nome: Arthur Antonio Soutelo Araujo
+                       2     ;Cartão UFRGS: 00304292
+                       3     
+                       4     ;Exercício 2:Desenvolva um código em Assembly que leia uma lista de 10 números e informe no
+                       5     ;                        registrador R 1 qual o maior numero da lista e no registrador R0 q
+                             ual o menor.
+                       6     ;Laboratório 1 - Exercício 2
+                       7     ;-------------------------------------------------------------------------------------
+                       8     ; Aponta para inicio da lista
+0000 900026            9     MOV DPTR, #LISTA
+                      10     ; Move para A índice da lista
+0003 7400             11     MOV A, #0
+                      12     ; Le valor
+0005 93               13     MOVC A, @A+DPTR
+                      14     ;-------------------------------------------
+                      15     ;                               Meu código
+0006 F8               16     MOV R0, A       ;Registrador R0 guarda o menor número
+0007 F9               17     MOV R1, A       ;Registrador R1 guarda o maior número
+                      18     
+0008 7F0A             19     MOV R7, #10     ;Tamanho do array
+000A 7E00             20     MOV R6, #0      ;Inicializa o contador
+000C                  21     STARTLOOP:
+000C C3               22             CLR C
+000D 0E               23             INC R6  ;Contador
+000E EE               24             MOV A, R6
+000F 9F               25             SUBB A, R7
+0010 501E             26             JNC ENDLOOP     ; Caso a flag do carry for 0, sai do loop
+                      27     
+0012 EE               28             MOV A, R6
+0013 93               29             MOVC A, @A+DPTR
+                      30     
+0014 C3               31             CLR C   ;Zera a flag do carry
+0015 98               32             SUBB A, R0      ; = A - R0
+0016 5003             33             JNC PULA1       ; Caso a flag do carry for 0 (A > R0), pula para o endereço PULA1
+                      34     
+                      35             ; A < R0
+0018 EE               36             MOV A, R6
+0019 93               37             MOVC A, @A+DPTR
+001A F8               38             MOV R0, A
+                      39     
+                      40             ;A > R0
+001B                  41             PULA1:
+001B EE               42                     MOV A, R6
+001C 93               43                     MOVC A, @A+DPTR
+001D C3               44                     CLR C
+                      45     
+001E 99               46                     SUBB A, R1      ; = A - R1
+001F 4003             47                     JC PULA2        ; Caso a flag do carry for 1 (A < R1), pula para o endereço
+                              PULA2
+                      48                     
+                      49                     ;A > R1
+0021 EE               50                     MOV A, R6
+0022 93               51                     MOVC A, @A+DPTR
+0023 F9               52                     MOV R1, A
+                      53                     
+                      54                     ;A < R1
+0024                  55                     PULA2:  
+A51 MACRO ASSEMBLER  LAB1_EX2                                                             08/08/2021 16:49:09 PAGE     2
+
+                      56             
+0024 80E6             57             JMP STARTLOOP
+                      58     
+                      59     ;-------------------------------------------
+0026                  60             LISTA:
+0026 17080A44         61                     DB 23, 8, 10, 68, 31, 17, 9, 36, 19, 37
+002A 1F110924                
+002E 1325                    
+                      62     ;-------------------------------------------
+0030                  63     ENDLOOP:
+                      64             END
+A51 MACRO ASSEMBLER  LAB1_EX2                                                             08/08/2021 16:49:09 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ENDLOOP. . . . . .  C ADDR   0030H   A   
+LISTA. . . . . . .  C ADDR   0026H   A   
+PULA1. . . . . . .  C ADDR   001BH   A   
+PULA2. . . . . . .  C ADDR   0024H   A   
+STARTLOOP. . . . .  C ADDR   000CH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
